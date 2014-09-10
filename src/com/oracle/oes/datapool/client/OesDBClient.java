@@ -26,6 +26,7 @@ public class OesDBClient {
     }
         
 public static void main(String[] args) {
-    System.out.println("Response from OesListener: " + OesDBClient.evaluatePolicy("testUser1", "schema1", "table1"));
+    System.out.println("OesDBCliebt main: Response from OesListener: " 
+            + OesDBClient.evaluatePolicy("trueuser", "REPOS_Pre/DatabaseObject/Esquema2", "table1"));
     }
 }

@@ -73,15 +73,17 @@ public class OesSMClient {
             OutputStreamWriter osw = new OutputStreamWriter(bos, "US-ASCII");
 
             TimeStamp = new java.util.Date().toString();
-            String process =
-                "Calling the Socket Server on " + host + " port " + port +
-                " at " + TimeStamp + ". Data: userID("+ userId + "); schema(" + databaseSchema + "); table(" + databaseTable + ")." + (char)13;
+            // String process =
+            //    "* CLIENT TRACE: Calling the Socket Server on " + host + " port " + port +
+            //    " at " + TimeStamp + ". Data: userID("+ userId + "); schema(" + databaseSchema + "); table(" + databaseTable + ")." + (char)13;
 
+            String process = userId + (char)13;
+            System.out.println("DAEMON TRACE: process = " + process);
+            
             /** Write across the socket connection and flush the buffer */
             osw.write(process);
             osw.flush();
             /** Instantiate a BufferedInputStream object for reading
-          /** Instantiate a BufferedInputStream object for reading
            * incoming socket streams.
            */
 
@@ -100,7 +102,7 @@ public class OesSMClient {
 
             /** Close the socket connection. */
             connection.close();
-            System.out.println(instr);
+            System.out.println("* CLIENT TRACE: received value: "+ instr);
         } catch (IOException f) {
             System.out.println("IOException: " + f);
             return "Error from OesSMClient (1): " + f.getMessage();
@@ -108,6 +110,6 @@ public class OesSMClient {
             System.out.println("Exception: " + g);
             return "Error from OesSMClient (2): " + g.getMessage();
         }
-        return "Hello world!!";
+        return instr.toString();
     }
 }
