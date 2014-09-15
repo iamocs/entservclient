@@ -13,7 +13,8 @@ package com.oracle.oes.datapool.client;
  * @author OCS
  */
 public class OesDBClient {
-        public static String evaluatePolicy(String userId, String database, String databaseSchema, String databaseTable, String action) {
+    
+        public static String evaluatePolicy(String userId, String database, String databaseSchema, String resourceType, String databaseTable, String action) {
         int port = 19999;
         String host = "localhost";
         OesSMClient cliente = null;
@@ -21,7 +22,7 @@ public class OesDBClient {
         try {
             cliente = new OesSMClient(host, port);
             
-            return cliente.evaluatePolicy(userId, database, databaseSchema, databaseTable, action);
+            return cliente.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, action);
         } catch (Exception e) {
             return "Error from OesWrapper: " + e.getMessage();
         }
@@ -29,6 +30,6 @@ public class OesDBClient {
         
 public static void main(String[] args) {
     System.out.println("OesDBCliebt main: Response from OesListener: " 
-            + OesDBClient.evaluatePolicy("trueuser", "REPOS_Pre", "Esquema2", "table1", "Select"));
+            + OesDBClient.evaluatePolicy("julio_cesar", "REPOS_Pre", "DatabaseObject3", "Esquema5", null, "Select"));
     }
 }

@@ -52,7 +52,7 @@ public class OesSMClient {
         return port;
     }
     
-    public String evaluatePolicy (String userId, String database, String databaseSchema, String databaseTable, String action){
+    public String evaluatePolicy (String userId, String database, String resourceType, String databaseSchema, String databaseTable, String action){
         StringBuffer instr = new StringBuffer();
         String TimeStamp;
         System.out.println("SocketClient initialized");
@@ -77,7 +77,13 @@ public class OesSMClient {
             //    "* CLIENT TRACE: Calling the Socket Server on " + host + " port " + port +
             //    " at " + TimeStamp + ". Data: userID("+ userId + "); schema(" + databaseSchema + "); table(" + databaseTable + ")." + (char)13;
 
-            String process = userId + "#" + database + "#" + databaseSchema + "#" + databaseTable + "#" + action + (char)13;
+            String process = userId + "#" + 
+                    ((database != null)? database:"empty") + "#" +
+                    ((resourceType != null)? resourceType:"empty") + "#" +
+                    ((databaseSchema != null)? databaseSchema:"empty") + "#" + 
+                    ((databaseTable != null)? databaseTable:"empty") + "#" + 
+                    ((action != null)? action:"empty") + (char)13;
+            
             System.out.println("DAEMON TRACE: process = " + process);
             
             /** Write across the socket connection and flush the buffer */
