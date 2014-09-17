@@ -52,10 +52,10 @@ public class OesDBClient {
             userId = s;
             s = null;
 
-            System.out.println("# Base de Datos: [REPOS_Pre]");
+            System.out.println("# Base de Datos: [dpdbvra]");
             s = in.nextLine();
             if (s.isEmpty()) {
-                database = "REPOS_Pre";
+                database = "dpdbvra";
                 System.out.println(database);
             } else {
                 database = s;
@@ -94,10 +94,10 @@ public class OesDBClient {
 
             s = null;
 
-            System.out.println("# Acción: [Select]");
+            System.out.println("# Acción: [select]");
             s = in.nextLine();
             if (s.isEmpty()) {
-                action = "Select";
+                action = "select";
                 System.out.println(action);
             } else {
                 action = s;
