@@ -16,6 +16,7 @@ import com.oracle.util.ReadProperties;
 public class ReadPropertiesOESDaemonClient {
     private String connHost;
     private String connPort;
+    private String appResourceType;
     
     private ReadProperties prop;
 
@@ -25,6 +26,7 @@ public class ReadPropertiesOESDaemonClient {
         
         connPort = prop.getPropertyValue("remote.connection.port");
         connHost = prop.getPropertyValue("remote.connection.host");
+        appResourceType = prop.getPropertyValue("application.resource.type");
     }
 
     public String getConnPort() {
@@ -33,6 +35,10 @@ public class ReadPropertiesOESDaemonClient {
 
     public String getConnHost() {
         return connHost;
+    }
+    
+    public String getAppResourceType() {
+        return appResourceType;
     }
 
 }

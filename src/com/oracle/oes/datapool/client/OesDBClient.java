@@ -14,13 +14,13 @@ import java.util.Scanner;
  */
 public class OesDBClient {
 
-    public static String evaluatePolicy(String userId, String database, String resourceType, String databaseSchema, String databaseTable, String action) {
+    public static String evaluatePolicy(String userId, String database, String resourceType, String databaseSchema, String databaseTable, String databaseAttribute, String action) {
         OesSMClient cliente = null;
 
         try {
             cliente = new OesSMClient();
 
-            return cliente.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, action);
+            return cliente.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, databaseAttribute, action);
         } catch (Exception e) {
             return "Error from OesWrapper: " + e.getMessage();
         }
@@ -32,6 +32,7 @@ public class OesDBClient {
         String resourceType = null;
         String databaseSchema = null;
         String databaseTable = null;
+        String databaseAttribute = null;
         String action = null;
         Scanner in = new Scanner(System.in);
         String s = null;
@@ -93,6 +94,17 @@ public class OesDBClient {
             }
 
             s = null;
+            
+            System.out.println("# Atributo de tabla de base de datos: [TABLA]");
+            s = in.nextLine();
+            if (s.isEmpty()) {
+                databaseAttribute = "TABLA";
+                databaseAttribute = null;
+            } else {
+                databaseAttribute = s;
+            }
+
+            s = null;
 
             System.out.println("# Acción: [select]");
             s = in.nextLine();
@@ -113,7 +125,7 @@ public class OesDBClient {
             System.out.println("Llamando al listener OES...");
             System.out.println("");
             System.out.println("Respuesta desde OesListener: "
-                    + OesDBClient.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, action));
+                    + OesDBClient.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, databaseTable, action));
             System.out.println("");
             System.out.println("");
             System.out.println("# Indique si quiere realizar una nueva consulta: (S|N) [N]");
