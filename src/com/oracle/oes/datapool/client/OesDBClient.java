@@ -15,12 +15,10 @@ import java.util.Scanner;
 public class OesDBClient {
 
     public static String evaluatePolicy(String userId, String database, String resourceType, String databaseSchema, String databaseTable, String action) {
-        int port = 19999;
-        String host = "localhost";
         OesSMClient cliente = null;
 
         try {
-            cliente = new OesSMClient(host, port);
+            cliente = new OesSMClient();
 
             return cliente.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, action);
         } catch (Exception e) {

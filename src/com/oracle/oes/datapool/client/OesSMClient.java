@@ -19,6 +19,8 @@ import java.io.*;
  *
  */
 
+import com.oracle.util.ReadPropertiesOESDaemonClient;
+
 public class OesSMClient {
     
     private String host = "localhost";
@@ -26,31 +28,22 @@ public class OesSMClient {
     private String TimeStamp;
     private InetAddress address = null;
     private Socket connection = null;
+    private ReadPropertiesOESDaemonClient properties;
         
     
     public OesSMClient (){
+        try{
+            properties = new ReadPropertiesOESDaemonClient();
+        } catch (Exception e){
+            System.out.println("# Se ha producido un error procesando el fichero de configuración...");
+            System.out.println(e.getMessage());
+            System.exit(-1);
+        }
+        
+        host = properties.getConnHost();
+        port = Integer.parseInt(properties.getConnPort());
     }
     
-    public OesSMClient(String mHost, int mPort){
-        host = mHost;
-        port = mPort;
-    }
-    
-    public void setHost(String mHost){
-        host = mHost;
-    }
-    
-    public String getHost (){
-        return host;
-    }
-    
-    public void setPort(int mPort){
-        port = mPort;
-    }
-    
-    public int getPort (){
-        return port;
-    }
     
     public String evaluatePolicy (String userId, String database, String resourceType, String databaseSchema, String databaseTable, String action){
         StringBuffer instr = new StringBuffer();
