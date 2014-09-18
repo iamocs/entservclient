@@ -17,6 +17,7 @@ public class ReadPropertiesOESDaemonClient {
     private String connHost;
     private String connPort;
     private String appResourceType;
+    private String groupOfAttributesProtectionLabel;
     
     private ReadProperties prop;
 
@@ -27,6 +28,7 @@ public class ReadPropertiesOESDaemonClient {
         connPort = prop.getPropertyValue("remote.connection.port");
         connHost = prop.getPropertyValue("remote.connection.host");
         appResourceType = prop.getPropertyValue("application.resource.type");
+        groupOfAttributesProtectionLabel = prop.getPropertyValue("policy.protection.groupOfAttributes.lable");
     }
 
     public String getConnPort() {
@@ -39,6 +41,10 @@ public class ReadPropertiesOESDaemonClient {
     
     public String getAppResourceType() {
         return appResourceType;
+    }
+    
+    public String getGroupOfAttributesProtectionLabel() {
+        return groupOfAttributesProtectionLabel;
     }
 
 }

@@ -95,10 +95,10 @@ public class OesDBClient {
 
             s = null;
             
-            System.out.println("# Atributo de tabla de base de datos: [TABLA]");
+            System.out.println("# Atributo de tabla de base de datos: [agrupacionDatosSensibles]");
             s = in.nextLine();
             if (s.isEmpty()) {
-                databaseAttribute = "TABLA";
+                databaseAttribute = "agrupacionDatosSensibles";
                 databaseAttribute = null;
             } else {
                 databaseAttribute = s;
