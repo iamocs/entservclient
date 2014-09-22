@@ -124,7 +124,7 @@ public class OesDBClient {
             System.out.println("Llamando al listener OES...");
             System.out.println("");
             System.out.println("Respuesta desde OesListener: "
-                    + OesDBClient.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, databaseTable, action));
+                    + OesDBClient.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, databaseAttribute, action));
             System.out.println("");
             System.out.println("");
             System.out.println("# Indique si quiere realizar una nueva consulta: (S|N) [N]");
