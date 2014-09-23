@@ -15,10 +15,16 @@ public class ReadProperties {
 
     }
 
-    public ReadProperties(String propertiesFileName) throws IOException {
+    public ReadProperties(boolean SystemProperty, String propertiesFileName) throws IOException {
         prop = new Properties();
-
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertiesFileName);
+        InputStream inputStream = null;
+        
+        if (SystemProperty){
+            inputStream = new FileInputStream (propertiesFileName);
+        } else {
+            inputStream = getClass().getClassLoader().getResourceAsStream(propertiesFileName);
+        }
+        
         prop.load(inputStream);
 
         if (inputStream == null) {

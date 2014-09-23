@@ -14,21 +14,30 @@ import com.oracle.util.ReadProperties;
  * @author ruben
  */
 public class ReadPropertiesOESDaemonClient {
+    
+    private static final String SYSTEM_CONFIG_PROPERTY_FILE = "com.oracle.oes.datapool.clietn.oessmclient.conf.file";
+    private static final String RESOURCE_CONFIG_PROPERTY_FILE = "oesclient.properties";
+    private static final String PROPERTY_REMOTE_CONNECTION_HOST_LABEL = "remote.connection.host";
+    private static final String PROPERTY_REMOTE_CONNECTION_PORT_LABEL = "remote.connection.port";
+    private static final String PROPERTY_APPLICATION_RESOURCE_TYPE_LABEL = "application.resource.type";
+    
     private String connHost;
     private String connPort;
     private String appResourceType;
-    private String groupOfAttributesProtectionLabel;
     
     private ReadProperties prop;
 
     public ReadPropertiesOESDaemonClient() throws IOException {
         
-        prop = new ReadProperties("oesclient.properties");
+        if (System.getProperty(SYSTEM_CONFIG_PROPERTY_FILE) != null){
+            prop = new ReadProperties(true, System.getProperty(SYSTEM_CONFIG_PROPERTY_FILE));
+        } else {
+            prop = new ReadProperties(false, RESOURCE_CONFIG_PROPERTY_FILE);
+        }
         
-        connPort = prop.getPropertyValue("remote.connection.port");
-        connHost = prop.getPropertyValue("remote.connection.host");
-        appResourceType = prop.getPropertyValue("application.resource.type");
-        groupOfAttributesProtectionLabel = prop.getPropertyValue("policy.protection.groupOfAttributes.lable");
+        connHost = prop.getPropertyValue(PROPERTY_REMOTE_CONNECTION_HOST_LABEL);
+        connPort = prop.getPropertyValue(PROPERTY_REMOTE_CONNECTION_PORT_LABEL);
+        appResourceType = prop.getPropertyValue(PROPERTY_APPLICATION_RESOURCE_TYPE_LABEL);
     }
 
     public String getConnPort() {
@@ -41,10 +50,6 @@ public class ReadPropertiesOESDaemonClient {
     
     public String getAppResourceType() {
         return appResourceType;
-    }
-    
-    public String getGroupOfAttributesProtectionLabel() {
-        return groupOfAttributesProtectionLabel;
     }
 
 }
