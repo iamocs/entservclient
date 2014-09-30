@@ -25,6 +25,18 @@ public class OesDBClient {
             return "Error from OesWrapper: " + e.getMessage();
         }
     }
+    
+    public static String evaluatePolicy(String userId, String database, String databaseSchema, String databaseTable, String databaseAttribute, String action) {
+        OesSMClient cliente = null;
+
+        try {
+            cliente = new OesSMClient();
+
+            return cliente.evaluatePolicy(userId, database, databaseSchema, databaseTable, databaseAttribute, action);
+        } catch (Exception e) {
+            return "Error from OesWrapper: " + e.getMessage();
+        }
+    }
 
     public static void main(String[] args) {
         String userId = null;
@@ -53,10 +65,10 @@ public class OesDBClient {
             userId = s;
             s = null;
 
-            System.out.println("# Base de Datos: [dpdbvra]");
+            System.out.println("# Base de Datos: [dpdbvr]");
             s = in.nextLine();
             if (s.isEmpty()) {
-                database = "dpdbvra";
+                database = "dpdbvr";
                 System.out.println(database);
             } else {
                 database = s;
