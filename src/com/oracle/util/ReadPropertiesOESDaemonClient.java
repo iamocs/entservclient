@@ -19,10 +19,12 @@ public class ReadPropertiesOESDaemonClient {
     private static final String RESOURCE_CONFIG_PROPERTY_FILE = "oesclient.properties";
     private static final String PROPERTY_REMOTE_CONNECTION_HOST_LABEL = "remote.connection.host";
     private static final String PROPERTY_REMOTE_CONNECTION_PORT_LABEL = "remote.connection.port";
+    private static final String PROPERTY_REMOTE_CONNECTION_TIMEOUT = "remote.connection.timeout";
     private static final String PROPERTY_APPLICATION_RESOURCE_TYPE_LABEL = "application.resource.type";
     
     private String connHost;
     private String connPort;
+    private String connTimeout;
     private String appResourceType;
     
     private ReadProperties prop;
@@ -37,6 +39,7 @@ public class ReadPropertiesOESDaemonClient {
         
         connHost = prop.getPropertyValue(PROPERTY_REMOTE_CONNECTION_HOST_LABEL);
         connPort = prop.getPropertyValue(PROPERTY_REMOTE_CONNECTION_PORT_LABEL);
+        connTimeout = prop.getPropertyValue(PROPERTY_REMOTE_CONNECTION_TIMEOUT);
         appResourceType = prop.getPropertyValue(PROPERTY_APPLICATION_RESOURCE_TYPE_LABEL);
     }
 
@@ -44,6 +47,10 @@ public class ReadPropertiesOESDaemonClient {
         return connPort;
     }
 
+     public String getConnTimeout() {
+        return connTimeout;
+    }
+    
     public String getConnHost() {
         return connHost;
     }

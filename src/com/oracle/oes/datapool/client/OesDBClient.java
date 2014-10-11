@@ -13,26 +13,27 @@ import java.util.Scanner;
  * @author OCS
  */
 public class OesDBClient {
+    
 
-    public static String evaluatePolicy(String userId, String database, String resourceType, String databaseSchema, String databaseTable, String databaseAttribute, String action) {
+    public static String evaluatePolicy(String dbHosts, String userId, String database, String resourceType, String databaseSchema, String databaseTable, String databaseAttribute, String action) {
         OesSMClient cliente = null;
 
         try {
             cliente = new OesSMClient();
 
-            return cliente.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, databaseAttribute, action);
+            return cliente.evaluatePolicy(dbHosts, userId, database, resourceType, databaseSchema, databaseTable, databaseAttribute, action);
         } catch (Exception e) {
             return "Error from OesWrapper: " + e.getMessage();
         }
     }
     
-    public static String evaluatePolicy(String userId, String database, String databaseSchema, String databaseTable, String databaseAttribute, String action) {
+    public static String evaluatePolicy(String dbHosts, String userId, String database, String databaseSchema, String databaseTable, String databaseAttribute, String action) {
         OesSMClient cliente = null;
 
         try {
             cliente = new OesSMClient();
 
-            return cliente.evaluatePolicy(userId, database, databaseSchema, databaseTable, databaseAttribute, action);
+            return cliente.evaluatePolicy(dbHosts, userId, database, databaseSchema, databaseTable, databaseAttribute, action);
         } catch (Exception e) {
             return "Error from OesWrapper: " + e.getMessage();
         }
@@ -49,12 +50,25 @@ public class OesDBClient {
         Scanner in = new Scanner(System.in);
         String s = null;
         boolean fin = false;
+        String alternativeDbHosts = null;
 
         System.out.println("Iniciando OesDbClient Tester...");
 
         while (!fin) {
 
             System.out.println("### Captura de parámetros de entrada ###");
+            
+            System.out.println("# Hosts Alternativos: [dpexr01db01.lacaixa.es,dpexr01db02.lacaixa.es,dpexr01db03.lacaixa.es,dpexr01db04.lacaixa.es]");
+            s = in.nextLine();
+            if (s.isEmpty()) {
+                alternativeDbHosts = "dpexr01db01.lacaixa.es,dpexr01db02.lacaixa.es,dpexr01db03.lacaixa.es,dpexr01db04.lacaixa.es";
+                System.out.println(alternativeDbHosts);
+            } else {
+                alternativeDbHosts = s;
+            }
+
+            s = null;
+                    
             System.out.println("# User ID: ");
             s = in.nextLine();
             while (s.isEmpty()) {
@@ -136,7 +150,7 @@ public class OesDBClient {
             System.out.println("Llamando al listener OES...");
             System.out.println("");
             System.out.println("Respuesta desde OesListener: "
-                    + OesDBClient.evaluatePolicy(userId, database, resourceType, databaseSchema, databaseTable, databaseAttribute, action));
+                    + OesDBClient.evaluatePolicy(alternativeDbHosts, userId, database, resourceType, databaseSchema, databaseTable, databaseAttribute, action));
             System.out.println("");
             System.out.println("");
             System.out.println("# Indique si quiere realizar una nueva consulta: (S|N) [N]");
