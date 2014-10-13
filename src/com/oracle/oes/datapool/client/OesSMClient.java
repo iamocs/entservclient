@@ -116,12 +116,15 @@ public class OesSMClient {
         String responseAux;
         String response = FALSE_STRING_VALUE_NOT_OES_LISTENER_RESPONSE;
         
+        //System.out.println("dbNodeAlternativeHosts = " + dbNodeAlternativeHosts);
+        
         hostNames.add(host);
         
         if (dbNodeAlternativeHosts != null){    
             dbHosts = dbNodeAlternativeHosts.split(DB_NODES_SEPARATOR_VALUE);
             
             for (int i=0; i < dbHosts.length; i++){
+                //System.out.println("dbHost["+i+"] = " + dbHosts[i]);
                 hostNames.add(dbHosts[i]);
             }
         }
@@ -149,8 +152,8 @@ public class OesSMClient {
                         databaseAttribute,
                         action);
                 
-                if (!response.toUpperCase().contains("ERROR")){
-                    System.out.println("ERROR: " + responseAux);
+                if (!responseAux.toUpperCase().contains("ERROR")){
+                    System.out.println("OK: " + responseAux);
                     finIntentos = true;
                     response = responseAux;
                 }

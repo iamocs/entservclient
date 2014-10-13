@@ -33,6 +33,17 @@ public class OesDBClient {
         try {
             cliente = new OesSMClient();
 
+            /*
+            System.out.println("Parámetros");
+            System.out.println(
+                            dbHosts + " # " +
+                            userId + " # " + 
+                            database + " # " + 
+                            databaseSchema + " # " + 
+                            databaseTable + " # " + 
+                            databaseAttribute + " # " + 
+                            action);
+            */
             return cliente.evaluatePolicy(dbHosts, userId, database, databaseSchema, databaseTable, databaseAttribute, action);
         } catch (Exception e) {
             return "Error from OesWrapper: " + e.getMessage();
@@ -51,7 +62,7 @@ public class OesDBClient {
         String s = null;
         boolean fin = false;
         String alternativeDbHosts = null;
-
+        
         System.out.println("Iniciando OesDbClient Tester...");
 
         while (!fin) {
