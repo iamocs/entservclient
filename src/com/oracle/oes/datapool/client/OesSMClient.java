@@ -26,7 +26,7 @@ public class OesSMClient {
 
     private String host = "localhost";
     private int port = 19999;
-    private int timeout = 1;
+    private int timeout = 1000;
     private String appResourceType = null;
     private String TimeStamp;
     private InetAddress address = null;
